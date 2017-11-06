@@ -1,0 +1,9 @@
+/**
+* http://babeljs.io/docs/plugins/preset-env/
+*/
+{
+  "presets": [
+    "react",
+    "env"
+  ]
+}
