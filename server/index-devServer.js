@@ -7,6 +7,10 @@ const config = require('../build/webpack.config.dev.js');
 const options = {
   contentBase: './dist',
   hot: true,
+  noInfo: false,
+  stats: {
+    colors: true
+  },
   host: 'localhost'
 };
 

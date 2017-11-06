@@ -8,7 +8,11 @@ const app =new koa()
 const compiler = webpack(config)
 
 app.use(webpackDevMiddleware(compiler, {
-  noInfo: true,
+  cache: false,
+  noInfo: false,
+  stats: {
+    colors: true
+  },
   publicPath: config.output.publicPath
 }));
 app.use(webpackHotMiddleware(compiler));

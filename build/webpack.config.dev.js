@@ -20,6 +20,13 @@ module.exports = {
       title: 'Development',
       name: 'inedx.html',
       template: './public/index.html'  // 根目录
+    }),
+    new webpack.DllReferencePlugin({
+      context: __dirname,
+      /**
+       * 在这里引入 manifest 文件
+       */
+      manifest: require('../public/vendor-manifest.json')
     })
   ],
 
