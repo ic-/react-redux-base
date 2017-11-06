@@ -7,7 +7,7 @@ const config = require('../build/webpack.config.dev.js');
 var compiler = webpack(config)
 const app = express()
 app.use(webpackDevMiddleware(compiler, {
-  noInfo: true,
+  noInfo: false,
   stats: {
     colors: true
   },

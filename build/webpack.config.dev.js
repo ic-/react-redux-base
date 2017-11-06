@@ -8,10 +8,10 @@ module.exports = {
     app: ['webpack-hot-middleware/client', './client/index.js'], // 根目录
   },
   devtool: 'inline-source-map',
-  devServer: {
-    hot: true,
-    contentBase: './dist'
-  },
+  // devServer: {
+  //   hot: true,
+  //   contentBase: './dist'
+  // },
   plugins: [
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
@@ -22,6 +22,7 @@ module.exports = {
       template: './public/index.html'  // 根目录
     })
   ],
+
   output: {
     filename: '[name].bundle.js',
     path: path.join(__dirname, '../dist'),
