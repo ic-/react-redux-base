@@ -8,3 +8,13 @@ if (module.hot) {
 module.hot.accept();
 }
 ```
+3. dll 无法配合html-webpack-plugin
+```js
+//并不起作用
+const Manifest = require('../public/vendor-manifest.json')
+  title: 'Development',
+      name: 'inedx.html',
+      template: './public/index.html',  // 根目录
+      + vendorName: Manifest.name + '.js',
+      + inject: true
+```

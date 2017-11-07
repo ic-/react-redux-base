@@ -9,8 +9,8 @@ module.exports = {
       'react-redux', 'react-router', 'redux', 'redux-immutable', 'redux-thunk']
   },
   output: {
-    filename: "vendor.js", // best use [hash] here too
-    path: path.join(__dirname, '..',"public"),
+    filename: "[name].dll.js", // best use [hash] here too
+    path: path.join(__dirname, '..',"dll"),
 		library: "vendor_lib_[hash]",
   },
   plugins: [
@@ -20,13 +20,13 @@ module.exports = {
       }
     }),
     new webpack.DllPlugin({
-      context: __dirname,
+      context:  __dirname,
       /**
        * path
        * 定义 manifest 文件生成的位置
        * [name]的部分由entry的名字替换
        */
-      path: path.join(__dirname, '..',"public", 'vendor-manifest.json'),
+      path: path.join(__dirname, '..',"dll", 'vendor-manifest.json'),
       /**
        * name
        * dll bundle 输出到那个全局变量上
@@ -34,16 +34,7 @@ module.exports = {
        */
       name: "vendor_lib_[hash]",
     })
-    // new webpack.DefinePlugin({
-    //   'process.env': {
-    //     NODE_ENV: JSON.stringify('development'),
-    //   }
-    // }),
-    // new webpack.DllPlugin({
-    //   context: __dirname,     // manifest 文件中请求的上下文环境 与DllReferencePlugin的context参数保持一致
-    //   name: '[name]Library',  // DLL 的函数名
-    //   path: path.join(__dirname, '../public', 'manifest.json'),  //manifest json 文件的绝对路径 (输出文件)
-    // })
+
   ],
 };
 

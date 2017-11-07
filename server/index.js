@@ -17,9 +17,14 @@ app.use(webpackDevMiddleware(compiler, {
 }));
 app.use(webpackHotMiddleware(compiler));
 
+app.use(ctx => {
+  ctx.e
+})
+
 app.listen('8081', 'localhost', function (err) {
   if (err) console.log(err)
 
   console.log('Koa start success!\n')
   console.log('Project is runing at http://localhost:8081/ \n')
 })
+
