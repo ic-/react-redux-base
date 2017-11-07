@@ -1,30 +1,17 @@
-const koa = require('koa');
-var webpack = require('webpack');
-var webpackDevMiddleware = require('koa-webpack-dev-middleware');
-var webpackHotMiddleware = require('koa-webpack-hot-middleware');
+import Koa from 'koa';
+import path from 'path';
+import logger from 'koa-logger';
+import koaBody from 'koa-body';
+import pageRoute from './lib/pageRoute';
+import webpack from './lib/webpack';
 
-const config = require('../build/webpack.config.dev.js')
-const app =new koa()
-const compiler = webpack(config)
+const app = new Koa();
+app.use(require('koa-static')(path.join(__dirname, '../public'), {}));
+app.use(logger());
+app.use(koaBody());
 
-app.use(webpackDevMiddleware(compiler, {
-  cache: false,
-  noInfo: false,
-  stats: {
-    colors: true
-  },
-  publicPath: config.output.publicPath
-}));
-app.use(webpackHotMiddleware(compiler));
+webpack(app)
+pageRoute(app)
 
-app.use(ctx => {
-  ctx.e
-})
-
-app.listen('8081', 'localhost', function (err) {
-  if (err) console.log(err)
-
-  console.log('Koa start success!\n')
-  console.log('Project is runing at http://localhost:8081/ \n')
-})
+app.listen(8081);
 

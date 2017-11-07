@@ -9,14 +9,14 @@ class App extends Component{
   }
 
   render(){
-    return <div>3333</div>
+    return <div>44444</div>
   }
 }
 
 
 render(
   <App />,
-  document.getElementById('root')
+  document.getElementById('layout')
 )
 
 // webapck-dev-middleware
