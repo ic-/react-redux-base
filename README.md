@@ -13,8 +13,8 @@ module.hot.accept();
 //并不起作用
 const Manifest = require('../public/vendor-manifest.json')
   title: 'Development',
-      name: 'inedx.html',
-      template: './public/index.html',  // 根目录
-      + vendorName: Manifest.name + '.js',
-      + inject: true
+  name: 'inedx.html',
+  template: './public/index.html',  // 根目录
+  + vendorName: Manifest.name + '.js',
+  + inject: true
 ```

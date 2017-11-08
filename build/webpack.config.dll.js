@@ -34,7 +34,6 @@ module.exports = {
        */
       name: "vendor_lib_[hash]",
     })
-
   ],
 };
 

@@ -1,41 +1,19 @@
-const path = require('path');
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-module.exports = {
-  entry: {
-    app: ['webpack-hot-middleware/client', './client/index.js'] // 根目录
-  },
+const merge = require('webpack-merge')
+const baseWebpackConfig = require('./webpack.config.base.js')
+module.exports = merge(baseWebpackConfig, {
   devtool: 'inline-source-map',
   // devServer: {
   //   hot: true,
   //   contentBase: './dist'
   // },
-  output: {
-    filename: '[name].bundle.js',
-    path: path.join(__dirname, '../dist'),
-    publicPath: '/',
-    library: "vendor_lib_[hash]"
-  },
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
-        use: {
-          loader: 'babel-loader'
-        }
-      },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader']
-      }
-    ]
-  },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': JSON.stringify('development')
+    }),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new CleanWebpackPlugin(['dist']),  //清除build prod
     // new HtmlWebpackPlugin({
     //   title: 'Development',
     //   name: 'inedx.html',
@@ -48,5 +26,5 @@ module.exports = {
        */
       manifest: require('../public/vendor-manifest.json')
     })
-  ],
-};
+  ]
+});

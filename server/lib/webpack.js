@@ -9,7 +9,7 @@ function init(app){
   try{
     app.use(webpackDevMiddleware(compiler, {
       cache: false,
-      noInfo: true,
+      noInfo: false,
       stats: {
         colors: true
       },
