@@ -4,6 +4,27 @@
 {
   "presets": [
     "react",
-    "env"
+    [
+      "env",
+      {
+        "targets": {
+          "browsers": [
+            "Android >= 4.4",
+            "iOS >=9"
+          ],
+          "debug": true
+        },
+        "modules": "commonjs", //设置ES6 模块转译的模块格式 默认是 commonjs
+        "debug": false, // debug，编译的时候 console
+        "include": [], // 总是启用哪些 plugins
+        "exclude": [], // 强制不启用哪些 plugins，用来防止某些插件被启用
+        "useBuiltIns": "usage " // 是否开启自动支持 polyfill
+      }
+    ]
+  ],
+  "plugins": [
+    "transform-class-properties", // 解析类属性，静态和实例的属性
+    "transform-object-rest-spread" // 对象暂时还不能使用spread操作符 ...
+    // "transform-react-jsx" //如果是需要支持 jsx 这个东西要单独装一下。
   ]
 }

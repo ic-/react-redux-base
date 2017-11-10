@@ -1,12 +1,7 @@
 import path from 'path';
 import webpack from 'webpack';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
-
 const baseConfig = {
   // context: path.resolve(__dirname, "../"),
-  entry: {
-    app: ['webpack-hot-middleware/client', './client/index.js'] // 根目录
-  },
   output: {
     filename: '[name].bundle.js', //输出路径
     path: path.join(__dirname, '../dist'), //文件名[entryName] [hash:len] [chunkhash:len]
@@ -32,33 +27,10 @@ const baseConfig = {
   // 用来进行模块加载相关的配置
   module: {
     rules: [
-      // webpack拥有一个类似于插件的机制，名为Loader，通过Loader，webpack能够针对每一种特定的资源做出相应的处理
-      // 1.test参数用来指示当前配置项针对哪些资源，该值应是一个条件值(condition)。
-      // 2.exclude参数用来剔除掉需要忽略的资源，该值应是一个条件值(condition)。
-      // 3.include参数用来表示本loader配置仅针对哪些目录/文件，该值应是一个条件值(condition)。
-      // 而include参数则用来指示目录；注意同时使用这两者的时候，实际上是and的关系。
-      // {
-      //   enforce: "pre",
-      //   test: /\.js$/,
-      //   exclude: '/node_modules/',
-      //   use: [
-      //     {
-      //       loader: 'eslint-loader',
-      //       options: {
-      //         emitError: true,
-      //         fix: true
-      //       },
-      //     }
-      //   ]
-      // },
       {
         test: /\.js$/,
         exclude: '/node_modules/',
-        use:['babel-loader']
-      },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: ['babel-loader']
       },
       {
         test: /\.json$/,
@@ -83,10 +55,7 @@ const baseConfig = {
         use: 'file-loader',
       },
     ],
-  },
-  plugins: [
-    new ExtractTextPlugin("styles.css")
-  ]
+  }
 }
 
 module.exports = baseConfig

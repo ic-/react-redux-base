@@ -18,3 +18,12 @@ const Manifest = require('../public/vendor-manifest.json')
   + vendorName: Manifest.name + '.js',
   + inject: true
 ```
+
+
+babel-class插件
+babel- es6 对象展开... 插件
+
+
+react-router-redux  不能处理 immutable
+-
+

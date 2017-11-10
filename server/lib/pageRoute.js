@@ -1,33 +1,28 @@
 
+import Router  from 'koa-router'
+import views  from 'koa-views'
+import path  from 'path'
 
-const router = require('koa-router')();
-const views = require('koa-views');
-const path = require('path');
+import {pagesRoute} from '../../config';
+const router = new Router()
 
-let scriptString = ''
-
-const pages = [
-  {
-    name: 'app',
-    title: 'demo'
-  }
-]
-
-pages.map( item => {
-  router.get(`/${item.name}`, function(ctx, next){
-    ctx.state = {
-      title: item.name,
-      scriptStr: wrapScriptImports(item.name),
-    }
-    return ctx.render('./index.hbs')
+function addRoute(){
+  pagesRoute.map( item => {
+    const name = item.name;
+    router.get(`/${name}`, function(ctx, next){
+      ctx.state = {
+        title: name,
+        scriptStr: wrapScriptImports(name),
+      }
+      return ctx.render('./index.hbs')
+    })
   })
-})
+}
 
 const wrapScriptImports = function (name) {
   const buildScript = function (src) {
     return `<script src="${src}"></script>`;
   };
-
   return `${buildScript('/vendor.dll.js')}${buildScript(`${name}.bundle.js`)}`
   // if (isDev) {
   //   data.scripts = `${buildScript('/vendor.dll.js')}
@@ -45,12 +40,7 @@ function pageRoute(app) {
     map: { hbs: 'handlebars' }
   }))
 
-  router.get('/', function (ctx, next) {
-    ctx.state = { title: '22222', author: 'queckezz' }
-
-    return ctx.render('./index.hbs')
-  });
-
+  addRoute();
 
   app.use(router.routes())
     .use(router.allowedMethods())
