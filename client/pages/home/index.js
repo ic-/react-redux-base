@@ -4,9 +4,8 @@ import { combineReducers } from 'redux-immutable';
 import { Route, IndexRoute, Switch } from 'react-router';
 
 import Root from '../../Root';
-import routing from '../../common/reducers/routing';
-import toast from '../../common/reducers/toast';
-import home from './reducer';
+
+import reducers from './reducer';
 import App from '../../common/App';
 import HomePage from './HomePage';
 import { urlContext } from '../../utils/config';
@@ -14,23 +13,23 @@ import { urlContext } from '../../utils/config';
 import '../../common/scss/main.scss';
 
 const routes = (
-  <Route path="/" component={App}>
-    <IndexRoute component={HomePage}/>
-  </Route>
+  <App>
+    <Route path="/home" component={HomePage}></Route>
+  </App>
 );
-
-const reducers = combineReducers({
-  routing,
-  toast,
-  home
-});
 
 render(
   <Root routes={routes} reducers={reducers} basename={`${urlContext}/home`} />,
   document.getElementById('layout')
 );
 
-
+if (module.hot) {
+  // Enable Webpack hot module replacement for reducers
+  module.hot.accept('./reducer', () => {
+    const nextRootReducer = require('./reducer');
+    store.replaceReducer(nextRootReducer);
+  });
+}
 if (module.hot) {
   module.hot.accept();
 }

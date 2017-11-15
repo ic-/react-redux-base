@@ -1,4 +1,7 @@
 import {Map} from 'immutable';
+import routing from '../../common/reducers/routing';
+import toast from '../../common/reducers/toast';
+import { combineReducers } from 'redux-immutable';
 
 function home(state = Map(), action) {
   const {type, content} = action;
@@ -10,4 +13,9 @@ function home(state = Map(), action) {
   return state;
 }
 
-export default home;
+
+export default combineReducers({
+  routing,
+  toast,
+  home
+});

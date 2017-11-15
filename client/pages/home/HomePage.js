@@ -37,7 +37,7 @@ export class Home extends Component {
     return (
       <div className='home'>
         <h1 className="mt-3">
-          React Redux Router Immutable Webpack Less etc.  22222
+          React Redux Router Immutable Webpack Less etc.  222222
         </h1>
         <hr className="mt-2 mb-2"/>
         <div>

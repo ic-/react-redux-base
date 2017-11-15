@@ -5,7 +5,7 @@ import Header from './components/Header'
 import Footer from './components/Footer';
 import {clearToast} from './action/toast';
 
-export class App extends Component {
+class App extends Component {
 
   static propTypes = {
     children: PropTypes.node,
