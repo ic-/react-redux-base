@@ -7,7 +7,7 @@ module.exports = merge(baseWebpackConfig, {
   devtool: 'inline-source-map',
   entry: {
     home: ['babel-polyfill', './client/pages/home/index.js', hotMiddlewareScript],
-    about: ['babel-polyfill', './client/pages/about/index.js', hotMiddlewareScript],
+    // about: ['babel-polyfill', './client/pages/about/index.js', hotMiddlewareScript],
   },
   module: {
     rules: [

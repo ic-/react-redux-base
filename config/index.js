@@ -3,10 +3,6 @@ module.exports = {
     {
       name: 'home',
       title: 'demo'
-    },
-    {
-      name: 'about',
-      title: 'demo'
     }
   ]
 }

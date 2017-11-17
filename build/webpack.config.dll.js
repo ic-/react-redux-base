@@ -5,8 +5,8 @@ module.exports = {
     extensions: [".js", ".jsx"]
   },
   entry: {
-    vendor: ['babel-polyfill', 'classnames', 'history', 'immutable', 'react', 'react-dom',
-      'react-redux', 'react-router', 'redux', 'redux-immutable', 'redux-thunk']
+    vendor: ['babel-polyfill', 'classnames', 'history',  'react', 'react-dom',
+      'react-redux', 'react-router', 'redux', 'prop-types', 'redux-thunk']
   },
   output: {
     filename: "[name].dll.js", // best use [hash] here too

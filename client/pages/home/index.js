@@ -1,35 +1,38 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { render } from 'react-dom';
-import { combineReducers } from 'redux-immutable';
-import { Route, IndexRoute, Switch } from 'react-router';
+import { combineReducers } from 'redux'
+import { Route, Switch } from 'react-router-dom'
 
-import Root from '../../Root';
-
-import reducers from './reducer';
-import App from '../../common/App';
-import HomePage from './HomePage';
-import { urlContext } from '../../utils/config';
-
-import '../../common/scss/main.scss';
+import App from '../../commons/app.js'
+import About from '../about'
+import Home from './page'
+import Root from '../../Root.js'
+import reducer from './reducer.js'
 
 const routes = (
-  <App>
-    <Route path="/home" component={HomePage}></Route>
-  </App>
-);
+  <div>
+    <Route path="/" component={App} />
+    <Route path="/home" component={Home} />
+    <Route path="/about" component={About} />
+  </div>
+)
+
+const reducers = combineReducers({
+  reducer
+});
+
 
 render(
-  <Root routes={routes} reducers={reducers} basename={`${urlContext}/home`} />,
+  <Root routes={routes} reducers={reducers} />,
   document.getElementById('layout')
 );
 
 if (module.hot) {
-  // Enable Webpack hot module replacement for reducers
   module.hot.accept('./reducer', () => {
     const nextRootReducer = require('./reducer');
     store.replaceReducer(nextRootReducer);
   });
-}
-if (module.hot) {
   module.hot.accept();
 }
+
+

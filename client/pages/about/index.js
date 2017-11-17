@@ -1,33 +1,17 @@
-import React from 'react';
-import {render} from 'react-dom';
-import {combineReducers} from 'redux-immutable';
-import {Route, IndexRoute} from 'react-router';
+import React, { Component } from 'react';
+import { render } from 'react-dom';
 
-import Root from '../../Root';
-import routing from '../../common/reducers/routing';
-import toast from '../../common/reducers/toast';
-import App from '../../common/App';
-import AboutPage from './AboutPage';
-import {urlContext} from '../../utils/config';
-import '../../common/scss/main.scss';
+class About extends Component {
+  constructor(props) {
+    super(props)
+  }
 
-const routes = (
-  <Route path="/" component={App}>
-    <IndexRoute component={AboutPage}/>
-  </Route>
-);
-
-const reducers = combineReducers({
-  routing,
-  toast
-});
-
-render(
-  <Root routes={routes} reducers={reducers} basename={`${urlContext}/about`}/>,
-  document.getElementById('layout')
-);
-
-
-if (module.hot) {
-  module.hot.accept();
+  render() {
+    return (
+      <div>about</div>
+    )
+  }
 }
+
+
+export default About
