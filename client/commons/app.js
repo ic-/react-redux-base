@@ -17,6 +17,9 @@ export class App extends Component {
     return (
       <div className="main">
         <Header />
+        {
+          this.props.children
+        }
         <Footer />
       </div>
     );

@@ -1,12 +1,16 @@
-import path from 'path';
-import webpack from 'webpack';
+
+const path = require('path')
+const webpack = require('webpack')
+const ManifestPlugin = require('webpack-manifest-plugin')
+module.exports = {
+    // ...
+    plugins: [
+      new ManifestPlugin()
+    ]
+};
 const baseConfig = {
   // context: path.resolve(__dirname, "../"),
-  output: {
-    filename: '[name].bundle.js', //输出路径
-    path: path.join(__dirname, '../dist'), //文件名[entryName] [hash:len] [chunkhash:len]
-    publicPath: '/', //资源访问路径，CDN
-  },
+
   // 用来配置依赖文件的匹配，如依赖文件的别名配置、模块的查找目录、默认查找的
   // 文件后缀名
   // resolve.root 该选型用来制定模块查找的根路径，必须为**绝对路径**，值可以
@@ -23,7 +27,8 @@ const baseConfig = {
       // 'components': path.resolve(__dirname, '../client/components')
     }
   },
-
+  plugins: [
+  ],
   // 用来进行模块加载相关的配置
   module: {
     rules: [

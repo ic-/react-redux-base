@@ -8,12 +8,11 @@ export class Home extends Component {
     super(props);
   }
   render() {
-    console.log(333)
     return (
-      <div>home</div>
+      <div>home 4444</div>
     )
   }
 }
 
-
 export default Home
+

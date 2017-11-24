@@ -1,4 +1,5 @@
 // const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path')
 const webpack = require('webpack');
 const merge = require('webpack-merge')
 const hotMiddlewareScript = 'webpack-hot-middleware/client'
@@ -7,7 +8,14 @@ module.exports = merge(baseWebpackConfig, {
   devtool: 'inline-source-map',
   entry: {
     home: ['babel-polyfill', './client/pages/home/index.js', hotMiddlewareScript],
-    // about: ['babel-polyfill', './client/pages/about/index.js', hotMiddlewareScript],
+    vender:[
+      'classnames'
+    ]
+  },
+  output: {
+    filename: '[name].bundle.js', //输出路径
+    path: path.join(__dirname, '../dist'), //文件名[entryName] [hash:len] [chunkhash:len]
+    publicPath: '/', //资源访问路径，CDN
   },
   module: {
     rules: [
@@ -18,21 +26,12 @@ module.exports = merge(baseWebpackConfig, {
       }
     ]
   },
-  // devServer: {
-  //   hot: true,
-  //   contentBase: './dist'
-  // },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': JSON.stringify('development')
     }),
-    new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    // new HtmlWebpackPlugin({
-    //   title: 'Development',
-    //   name: 'inedx.html',
-    //   template: './public/index.html',  // 根目录
-    // }),
+
     new webpack.DllReferencePlugin({
       context: __dirname,
       /**

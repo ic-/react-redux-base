@@ -1,31 +1,36 @@
+const path = require('path')
 const webpack = require('webpack');
 const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.config.base.js')
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = merge(baseWebpackConfig, {
+  devtool: 'source-map',
   entry: {
     home: ['babel-polyfill', './client/pages/home/index.js'],
-    about: ['babel-polyfill', './client/pages/about/index.js'],
-    page1: ['babel-polyfill', './client/pages/page-1/index.js'],
-    page2: ['babel-polyfill', './client/pages/page-2/index.js'],
+    vender:[
+      'classnames'
+    ]
   },
-  devtool: 'inline-source-map',
+  output: {
+    filename: '[name].[chunkhash].js',
+    path: path.resolve(__dirname, '../dist')
+  },
   module:{
     rules: [
-      {
-        enforce: "pre",
-        test: /\.js$/,
-        exclude: '/node_modules/',
-        use: [
-          {
-            loader: 'eslint-loader',
-            options: {
-              emitError: true,
-              fix: true
-            },
-          }
-        ]
-      },
+      // {
+      //   enforce: "pre",
+      //   test: /\.js$/,
+      //   exclude: '/node_modules/',
+      //   use: [
+      //     {
+      //       loader: 'eslint-loader',
+      //       options: {
+      //         emitError: true,
+      //         fix: true
+      //       },
+      //     }
+      //   ]
+      // },
       {
         test: /\.(css|scss)$/,
         exclude: '/node_modules/',
@@ -37,15 +42,15 @@ module.exports = merge(baseWebpackConfig, {
     ]
   },
   plugins: [
+    new ManifestPlugin(),
+    new webpack.NamedModulesPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      // minChunks: 3,
+    }),
     new webpack.DefinePlugin({
       'process.env': JSON.stringify('production')
     }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: 3,
-    }),
-    plugins: [
-      new ExtractTextPlugin("styles.css")
-    ]
+    new ExtractTextPlugin("styles.css")
   ]
 });

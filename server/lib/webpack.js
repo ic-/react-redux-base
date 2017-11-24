@@ -9,8 +9,11 @@ function init(app){
   try{
     app.use(webpackDevMiddleware(compiler, {
       cache: false,
-      noInfo: false,
       stats: {
+        assets: true,
+        chunks: false,
+        children: false,
+        timings: true,
         colors: true
       },
       publicPath: config.output.publicPath
